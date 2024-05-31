@@ -2,12 +2,14 @@ package edu.htwd.gpstracktutorial;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +33,8 @@ import java.security.Permissions;
 
 public class MainActivity extends AppCompatActivity {
 
+    private Button move;
+
     private static final int PERMISSION_FINE_LOCATION = 99;
     TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
 
@@ -49,6 +53,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        move = findViewById(R.id.changeactivity);
+        move.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(MainActivity.this, GPSView.class);
+                startActivity(intent);
+            }
+        });
 
 
         // give each UI variable a value
