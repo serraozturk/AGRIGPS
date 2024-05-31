@@ -29,7 +29,8 @@ public class GPSView extends AppCompatActivity {
         move.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent intent=new Intent(MainActivity.this, second.class)
+                Intent intent=new Intent(GPSView.this, MainActivity.class);
+                startActivity(intent);
             }
         });
     }
