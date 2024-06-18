@@ -238,7 +238,7 @@ public class GPSView extends AppCompatActivity {
         try {
             //Look for the Adress correct
             List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-            tv_address.setText(addresses.get(0).getAddressLine(0));
+            tv_address.setText(addresses.get(0).getCountryName());
         }
         catch (Exception e){
             //Exception in case adress is not found
