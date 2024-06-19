@@ -114,7 +114,7 @@ public class GPSView extends AppCompatActivity {
             }
         };
 
-        btn_newWayPoint.setOnClickListener();Clicklistener(new View.OnClickListener() {
+        btn_newWayPoint.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View V) {
                 //get the GPS location
@@ -268,6 +268,14 @@ public class GPSView extends AppCompatActivity {
             //Exception in case adress is not found
             tv_address.setText("Unable to get Country name");
         }
+
+        MyApplication myApplication = (MyApplication) getApplicationContext();
+        savedLocations = myApplication.getMyLocations();
+
+        // show the number of waypoints saved
+        tv_wayPointCounts.setText(Integer.toString(savedLocations.size()));
+
+
     }
 
 
@@ -279,7 +287,5 @@ public class GPSView extends AppCompatActivity {
         return 30;
     }
 
-    // show the number of waypoints saved
-    tv_wayPointCounts.setText(Integer.toString(savedlocations.size()));
 
 }
