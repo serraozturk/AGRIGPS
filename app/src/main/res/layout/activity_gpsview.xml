@@ -205,10 +205,10 @@
         android:text="Go Back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.948"
+        app:layout_constraintHorizontal_bias="0.977"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintVertical_bias="0.963" />
 
     <TextView
         android:id="@+id/gpsinfo"
@@ -225,20 +225,22 @@
 
     <Button
         android:id="@+id/btn_newWayPoint"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="199dp"
+        android:layout_height="44dp"
         android:text="NEW WAYPOINT"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="554dp" />
+        app:layout_constraintBottom_toTopOf="@+id/btn_showWayPointList"
+        tools:layout_editor_absoluteX="0dp" />
 
     <Button
         android:id="@+id/btn_showWayPointList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="28dp"
         android:insetLeft="4px"
         android:insetRight="4px"
         android:text="SHOW WAYPOINT LIST"
-        app:layout_constraintTop_toBottomOf="@+id/btn_newWayPoint"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/changeactivity"
+        tools:layout_editor_absoluteX="-1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
