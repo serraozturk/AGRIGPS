@@ -35,9 +35,18 @@ public class GPSView extends AppCompatActivity {
     private Button move;
 
     private static final int PERMISSION_FINE_LOCATION = 99;
-    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address;
-
+    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
+    Button btn_newWayPoint, btn_showWayPointList;
     Switch sw_locationupdates, sw_gps;
+
+    //  variable to remember if we are tracking or not
+    boolean update0n = false;
+
+    //current location
+    Location currentLocation;
+
+    //list of saved locations
+    List<Location> savedLocations;
 
     //Location request is a config file for all settings realeted to FusedLocationProviderClient
     LocationRequest locationRequest;
@@ -76,6 +85,9 @@ public class GPSView extends AppCompatActivity {
         tv_address = findViewById(R.id.tv_address);
         sw_gps = findViewById(R.id.sw_gps);
         sw_locationupdates = findViewById(R.id.sw_locationsupdates);
+        btn_newWayPoint = findViewById(R.id.btn_newWayPoint);
+        btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
+        tv_wayPointCounts = findViewById(R.id.tv_countOfCrumbs);
 
 
         //set all properties of LocationRequest
@@ -101,6 +113,18 @@ public class GPSView extends AppCompatActivity {
                 updateUIValues(locationResult.getLastLocation());
             }
         };
+
+        btn_newWayPoint.setOnClickListener();Clicklistener(new View.OnClickListener() {
+            @Override
+            public void onClick(View V) {
+                //get the GPS location
+
+                //add the new location to the global list
+                MyApplication myApplication = (MyApplication)getApplicationContext();
+                savedLocations = myApplication.getMyLocations();
+                savedLocations.add(currentLocation);
+            }
+        });
 
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,7 +217,7 @@ public class GPSView extends AppCompatActivity {
                 public void onSuccess(Location location) {
                     //we got permission. Put values of Location XX into UI Components
                     updateUIValues(location);
-
+                    currentLocation = location;
                 }
             });
         }
@@ -254,5 +278,8 @@ public class GPSView extends AppCompatActivity {
     private static int DefaultUpdate() {
         return 30;
     }
+
+    // show the number of waypoints saved
+    tv_wayPointCounts.setText(Integer.toString(savedlocations.size()));
 
 }
