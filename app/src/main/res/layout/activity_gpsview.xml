@@ -66,7 +66,6 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:text="Updates:"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sw_locationsupdates" />
@@ -84,13 +83,12 @@
         android:id="@+id/sw_locationsupdates"
         android:layout_width="311dp"
         android:layout_height="70dp"
-        android:layout_marginTop="100dp"
         android:checked="true"
         android:text="Location Updates"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/divider" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_newWayPoint" />
 
     <TextView
         android:id="@+id/tv_lon"
@@ -191,13 +189,12 @@
         android:id="@+id/btn_newWayPoint"
         android:layout_width="241dp"
         android:layout_height="52dp"
-        android:layout_marginBottom="232dp"
         android:backgroundTint="#009688"
         android:text="NEW WAYPOINT"
-        app:layout_constraintBottom_toTopOf="@+id/btn_showWayPointList"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.094"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/divider" />
 
     <Button
         android:id="@+id/btn_showWayPointList"
@@ -224,9 +221,7 @@
         android:text="Show Map"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.901"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.532" />
+        app:layout_constraintTop_toBottomOf="@+id/divider"
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
