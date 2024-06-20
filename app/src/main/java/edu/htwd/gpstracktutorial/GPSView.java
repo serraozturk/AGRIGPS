@@ -126,6 +126,14 @@ public class GPSView extends AppCompatActivity {
             }
         });
 
+        btn_showWayPointList.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GPSView.this, ShowlocationsSavedlist.class);
+                startActivity(i);
+            }
+        });
+
         sw_gps.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

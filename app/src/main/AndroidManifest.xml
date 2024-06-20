@@ -17,6 +17,9 @@
         android:theme="@style/Theme.GPSTrackTutorial"
         tools:targetApi="31">
         <activity
+            android:name=".ShowlocationsSavedlist"
+            android:exported="false" />
+        <activity
             android:name=".GPSView"
             android:exported="false" />
         <activity
