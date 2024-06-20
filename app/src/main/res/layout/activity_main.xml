@@ -23,18 +23,19 @@
         android:id="@+id/Move"
         android:layout_width="161dp"
         android:layout_height="52dp"
+        android:backgroundTint="#009688"
         android:text="StartActivity"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
 
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Tittle"
         app:layout_constraintVertical_bias="0.624" />
 
     <Spinner
         android:id="@+id/spinneractivitys"
-        android:layout_width="207dp"
-        android:layout_height="47dp"
+        android:layout_width="217dp"
+        android:layout_height="55dp"
         android:background="@android:drawable/btn_dropdown"
         android:spinnerMode="dropdown"
         app:layout_constraintBottom_toBottomOf="parent"
