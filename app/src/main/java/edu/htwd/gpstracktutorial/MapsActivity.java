@@ -81,22 +81,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
 
-
-        /**for (Location location: savedLocations
+    //list tracking
+        for (Location locationss: savedLocations
         ){
-            LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
-            MarkerOptions markerOptions = new MarkerOptions();
-            markerOptions.position(latLng);
-            Geocoder geocoder = new Geocoder(MapsActivity.this);
+            LatLng latLng = new LatLng(locationss.getLatitude(), locationss.getLongitude());
+            MarkerOptions markerOptionss = new MarkerOptions();
+            markerOptionss.position(latLng);
+            Geocoder geocoders = new Geocoder(MapsActivity.this);
             try {
-                List<Address> addresses = geocoder.getFromLocation(location.getLatitude(),location.getLongitude(),1);
-                markerOptions.title(addresses.get(0).getAddressLine(0));
-                mMap.addMarker(markerOptions);
+                List<Address> addresses = geocoders.getFromLocation(locationss.getLatitude(),locationss.getLongitude(),1);
+                markerOptionss.title(addresses.get(0).getAddressLine(0));
+                mMap.addMarker(markerOptionss);
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
 
-        }**/
+        }
 
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(lastlocationPlaced, 15.0f));
 
