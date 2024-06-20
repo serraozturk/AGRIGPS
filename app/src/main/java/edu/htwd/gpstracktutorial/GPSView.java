@@ -36,7 +36,7 @@ public class GPSView extends AppCompatActivity {
 
     private static final int PERMISSION_FINE_LOCATION = 99;
     TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
-    Button btn_newWayPoint, btn_showWayPointList;
+    Button btn_newWayPoint, btn_showWayPointList, btn_showMap;
     Switch sw_locationupdates, sw_gps;
 
     //  variable to remember if we are tracking or not
@@ -88,6 +88,7 @@ public class GPSView extends AppCompatActivity {
         btn_newWayPoint = findViewById(R.id.btn_newWayPoint);
         btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
         tv_wayPointCounts = findViewById(R.id.tv_countOfCrumbs);
+        btn_showMap = findViewById(R.id.btn_showMap);
 
 
         //set all properties of LocationRequest
@@ -130,6 +131,14 @@ public class GPSView extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(GPSView.this, ShowlocationsSavedlist.class);
+                startActivity(i);
+            }
+        });
+
+        btn_showMap.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(GPSView.this, MapsActivity.class);
                 startActivity(i);
             }
         });
