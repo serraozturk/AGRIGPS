@@ -15,11 +15,16 @@ import android.widget.Button;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import android.content.DialogInterface;
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
@@ -38,6 +43,15 @@ public class GPSView extends AppCompatActivity {
     TextView tv_lat, tv_lon, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
     Button btn_newWayPoint, btn_showWayPointList, btn_showMap;
     Switch sw_locationupdates, sw_gps;
+
+    //VARIABLES FOR TIMER
+    TextView timerText;
+    Button stopStartButton;
+
+    Timer timer;
+    TimerTask timerTask;
+    Double time = 0.0;
+    boolean timerStarted = false; //VARIABLE FOR TIMER
 
     //  variable to remember if we are tracking or not
     boolean update0n = false;
@@ -61,6 +75,11 @@ public class GPSView extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gpsview);
+
+        timerText = (TextView) findViewById(R.id.timerText);
+        stopStartButton = (Button) findViewById(R.id.startStopButton);
+
+        timer = new Timer();
 
         move = findViewById(R.id.changeactivity);
         move.setOnClickListener(new View.OnClickListener() {
@@ -172,6 +191,8 @@ public class GPSView extends AppCompatActivity {
 
     }//end of CreateMethod
 
+
+
     private void stopLocationUpdate() {
         tv_updates.setText("Location is NOT being Track");
         tv_lat.setText("Location is not Being track");
@@ -277,6 +298,108 @@ public class GPSView extends AppCompatActivity {
     private static int DefaultUpdate() {
         return 30;
     }
+
+    //starting method from here for timer
+
+    public void resetTapped(View view)
+    {
+        AlertDialog.Builder resetAlert = new AlertDialog.Builder(this);
+        resetAlert.setTitle("Reset Timer");
+        resetAlert.setMessage("Are you sure that you want to stop activity, it will reset.");
+        resetAlert.setPositiveButton("Reset", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                if(timerTask != null)
+                {
+                    timerTask.cancel();
+                    setButtonUI("START", R.color.green);
+                    time = 0.0;
+                    timerStarted = false;
+                    timerText.setText(formatTime(0,0,0));
+
+                }
+            }
+        });
+
+        resetAlert.setNeutralButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i)
+            {
+                //do nothing
+            }
+        });
+
+        resetAlert.show();
+
+    }
+
+    public void startStopTapped(View view)
+    {
+        if(timerStarted == false)
+        {
+            timerStarted = true;
+            setButtonUI("STOP", R.color.red);
+
+            startTimer();
+        }
+        else
+        {
+            timerStarted = false;
+            setButtonUI("START", R.color.green);
+
+            timerTask.cancel();
+        }
+    }
+
+    private void setButtonUI(String start, int color)
+    {
+        stopStartButton.setText(start);
+        stopStartButton.setTextColor(ContextCompat.getColor(this, color));
+    }
+
+    private void startTimer()
+    {
+        timerTask = new TimerTask()
+        {
+            @Override
+            public void run()
+            {
+                runOnUiThread(new Runnable()
+                {
+                    @Override
+                    public void run()
+                    {
+                        time++;
+                        timerText.setText(getTimerText());
+                    }
+                });
+            }
+
+        };
+        timer.scheduleAtFixedRate(timerTask, 0 ,1000);
+    }
+
+
+    private String getTimerText()
+    {
+        int rounded = (int) Math.round(time);
+
+        int seconds = ((rounded % 86400) % 3600) % 60;
+        int minutes = ((rounded % 86400) % 3600) / 60;
+        int hours = ((rounded % 86400) / 3600);
+
+        return formatTime(seconds, minutes, hours);
+    }
+
+    private String formatTime(int seconds, int minutes, int hours)
+    {
+        return String.format("%02d",hours) + " : " + String.format("%02d",minutes) + " : " + String.format("%02d",seconds);
+    }
+
+
 
 
 }
