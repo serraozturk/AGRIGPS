@@ -304,8 +304,8 @@ public class GPSView extends AppCompatActivity {
     public void resetTapped(View view)
     {
         AlertDialog.Builder resetAlert = new AlertDialog.Builder(this);
-        resetAlert.setTitle("Reset Timer");
-        resetAlert.setMessage("Are you sure that you want to stop activity, it will reset.");
+        resetAlert.setTitle("Finish Activity");
+        resetAlert.setMessage("Are you sure you want to finish the activity? ");
         resetAlert.setPositiveButton("Reset", new DialogInterface.OnClickListener()
         {
             @Override
