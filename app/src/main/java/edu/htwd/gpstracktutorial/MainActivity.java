@@ -18,8 +18,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-
-
     //create dropdow
     private Spinner dropdown;
     //Buton to start activitys
