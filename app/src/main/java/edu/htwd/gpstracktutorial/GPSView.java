@@ -35,7 +35,7 @@ public class GPSView extends AppCompatActivity {
     private Button move;
 
     private static final int PERMISSION_FINE_LOCATION = 99;
-    TextView tv_lat, tv_lon, tv_altitude, tv_accuracy, tv_speed, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
+    TextView tv_lat, tv_lon, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
     Button btn_newWayPoint, btn_showWayPointList, btn_showMap;
     Switch sw_locationupdates, sw_gps;
 
@@ -77,9 +77,6 @@ public class GPSView extends AppCompatActivity {
         tv_lat = findViewById(R.id.tv_lat);
 
         tv_lon = findViewById(R.id.tv_lon);
-        tv_accuracy = findViewById(R.id.tv_accuracy);
-        tv_altitude = findViewById(R.id.tv_altitude);
-        tv_speed = findViewById(R.id.tv_speed);
         tv_sensor = findViewById(R.id.tv_sensor);
         tv_updates = findViewById(R.id.tv_updates);
         tv_address = findViewById(R.id.tv_address);
@@ -179,10 +176,7 @@ public class GPSView extends AppCompatActivity {
         tv_updates.setText("Location is NOT being Track");
         tv_lat.setText("Location is not Being track");
         tv_lon.setText("Location is not Being track");
-        tv_speed.setText("Location is not Being track");
         tv_address.setText("Location is not Being track");
-        tv_accuracy.setText("Location is not Being track");
-        tv_altitude.setText("Location is not Being track");
         tv_sensor.setText("Location is not Being track");
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
@@ -252,26 +246,6 @@ public class GPSView extends AppCompatActivity {
         tv_lat.setText(String.valueOf(location.getLatitude()));
 
         tv_lon.setText(String.valueOf(location.getLongitude()));
-
-        if (location.hasAccuracy()){
-            tv_accuracy.setText(String.valueOf(location.getAccuracy()));
-        }
-
-
-
-        if (location.hasAltitude()){
-            tv_altitude.setText(String.valueOf(location.getAltitude()));
-        }
-        else {
-            tv_altitude.setText("Not available");
-        }
-
-        if (location.hasSpeed()){
-            tv_speed.setText(String.valueOf(location.getSpeed()));
-        }
-        else {
-            tv_speed.setText("Not available");
-        }
 
         //translation to Adresse
         Geocoder geocoder = new Geocoder(GPSView.this);
