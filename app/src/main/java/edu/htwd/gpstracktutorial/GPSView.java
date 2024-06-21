@@ -40,7 +40,7 @@ public class GPSView extends AppCompatActivity {
     private Button move;
 
     private static final int PERMISSION_FINE_LOCATION = 99;
-    TextView tv_lat, tv_lon, tv_sensor, tv_updates, tv_address, tv_wayPointCounts;
+    TextView tv_lat, tv_lon, tv_sensor, tv_updates, tv_address, tv_wayPointCounts, titlepage;
     Button btn_newWayPoint, btn_showWayPointList, btn_showMap;
     Switch sw_locationupdates, sw_gps;
 
@@ -70,11 +70,24 @@ public class GPSView extends AppCompatActivity {
     //Google location API. The majority of the App features depends on this.
     FusedLocationProviderClient fusedLocationProviderClient;
 
+    //this varibale will be use for notification method
+    String activityname = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_gpsview);
+
+        //Get info from the Main View
+        String titlename = getIntent().getStringExtra("farmactivity");
+        //change the View Text from tha page
+        activityname = titlename;
+
+        titlepage = findViewById(R.id.titlepage);
+        titlepage.setText(titlename);
+
+        //Set timer
 
         timerText = (TextView) findViewById(R.id.timerText);
         stopStartButton = (Button) findViewById(R.id.startStopButton);
@@ -96,10 +109,10 @@ public class GPSView extends AppCompatActivity {
         tv_lat = findViewById(R.id.tv_lat);
 
         tv_lon = findViewById(R.id.tv_lon);
-        tv_sensor = findViewById(R.id.tv_sensor);
+
         tv_updates = findViewById(R.id.tv_updates);
         tv_address = findViewById(R.id.tv_address);
-        sw_gps = findViewById(R.id.sw_gps);
+
         sw_locationupdates = findViewById(R.id.sw_locationsupdates);
         btn_newWayPoint = findViewById(R.id.btn_newWayPoint);
         btn_showWayPointList = findViewById(R.id.btn_showWayPointList);
@@ -159,19 +172,7 @@ public class GPSView extends AppCompatActivity {
             }
         });
 
-        sw_gps.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (sw_gps.isChecked()) {
-                    //most accurate - use GPS
-                    locationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-                    tv_sensor.setText("Using GPS sensors");
-                } else {
-                    locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-                    tv_sensor.setText("Using Towers + Wifi");
-                }
-            }
-        });
+
 
         sw_locationupdates.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -192,13 +193,12 @@ public class GPSView extends AppCompatActivity {
     }//end of CreateMethod
 
 
-
     private void stopLocationUpdate() {
         tv_updates.setText("Location is NOT being Track");
         tv_lat.setText("Location is not Being track");
         tv_lon.setText("Location is not Being track");
         tv_address.setText("Location is not Being track");
-        tv_sensor.setText("Location is not Being track");
+
 
         fusedLocationProviderClient.removeLocationUpdates(locationCallBack);
 
@@ -306,28 +306,23 @@ public class GPSView extends AppCompatActivity {
         AlertDialog.Builder resetAlert = new AlertDialog.Builder(this);
         resetAlert.setTitle("Finish Activity");
         resetAlert.setMessage("Are you sure you want to finish the activity? ");
-        resetAlert.setPositiveButton("Finish", new DialogInterface.OnClickListener()
-        {
+        resetAlert.setPositiveButton("Finish", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
-                if(timerTask != null)
-                {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                if (timerTask != null) {
                     timerTask.cancel();
-                    setButtonUI("START", R.color.green);
+                    setButtonUI("START", R.color.white);
                     time = 0.0;
                     timerStarted = false;
-                    timerText.setText(formatTime(0,0,0));
+                    timerText.setText(formatTime(0, 0, 0));
+                    Toast.makeText(GPSView.this, "Activity " + activityname + " finish, you can create a new same activity or go back to create a different one", Toast.LENGTH_LONG).show();
 
                 }
-            }
-        });
 
-        resetAlert.setNeutralButton("Cancel", new DialogInterface.OnClickListener()
-        {
+            }
+        }).setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i)
-            {
+            public void onClick(DialogInterface dialogInterface, int i) {
                 //do nothing
             }
         });
