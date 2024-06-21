@@ -70,6 +70,7 @@ public class GPSView extends AppCompatActivity {
     //Google location API. The majority of the App features depends on this.
     FusedLocationProviderClient fusedLocationProviderClient;
 
+    //this varibale will be use for notification method
     String activityname = "";
 
     @Override
@@ -80,6 +81,7 @@ public class GPSView extends AppCompatActivity {
 
         //Get info from the Main View
         String titlename = getIntent().getStringExtra("farmactivity");
+        //change the View Text from tha page
         activityname = titlename;
 
         titlepage = findViewById(R.id.titlepage);
