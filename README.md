@@ -1,0 +1,1 @@
+. The GPS Tracking App is designed to provide users with a simple and intuitive way to track their GPS locations. The app has two main activities: the main activity and the GPS view activity. The main activity allows users to select an activity to track, while the GPS view activity displays the user's current location, latitude, longitude, and address. 
